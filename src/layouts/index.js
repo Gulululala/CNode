@@ -1,14 +1,16 @@
 import styles from './index.css';
 import React from 'react';
+import Header from './header/header';
+import Footer from './footer/footer';
 
 function BasicLayout(props) {
   return (
     <div className={styles.normal}>
-      <h1 className={styles.header}>Header</h1>
+      <Header/>
       <div className={styles.main}>
         {props.children}
       </div>
-      <h1 className={styles.footer}>Footer</h1>
+      <Footer/>
     </div>
   );
 }

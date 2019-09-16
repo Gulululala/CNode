@@ -1,16 +1,15 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'dva'
-import styles from './homeStyle.less'
+import styles from './aboutStyle.less'
 import { Row, Col } from 'antd'
-import SideBar from '@/components/SideBar'
 
-// const namespace = 'homeMod'
+// const namespace = 'about'
 
-@connect(({ homeMod }) => ({
-  homeMod,
+@connect(({ about }) => ({
+  about,
 }))
 
-class HomeView extends PureComponent {
+class About extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,11 +26,13 @@ class HomeView extends PureComponent {
         <Row gutter={16}>
           <Col span={19}>
             <div className={styles.content}>
-              Write home content here！！！
+              Write about content here！！！
             </div>
           </Col>
           <Col span={5}>
-            <SideBar />
+            <div className={styles.sidebar}>
+              side
+            </div>
           </Col>
         </Row>
       </div>
@@ -39,4 +40,4 @@ class HomeView extends PureComponent {
   }
 }
 
-export default HomeView
+export default About
