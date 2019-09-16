@@ -1,6 +1,6 @@
 // 导出的状态机
 const Module = {
-  namespace: 'homeMod',
+  namespace: 'detail',
 
   state: {
   },
