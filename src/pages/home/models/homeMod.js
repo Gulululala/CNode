@@ -73,9 +73,9 @@ const Module = {
   },
   reducers: {
     updateStore(preState, action) {
-      return { ...preState, ...action.payload };
+      return { ...preState, ...action.payload }
     },
   },
-};
+}
 
-export default Module;
+export default Module

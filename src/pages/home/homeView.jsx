@@ -3,6 +3,7 @@ import { connect } from 'dva'
 import styles from './homeStyle.less'
 import { Row, Col, Pagination, Button } from 'antd'
 import { dispatch } from '../../../../../../../../AppData/Local/Microsoft/TypeScript/3.6/node_modules/rxjs/internal/observable/range';
+import SideBar from '@/components/SideBar'
 
 const namespace = 'homeMod'
 
@@ -94,9 +95,7 @@ class HomeView extends PureComponent {
             </div>
           </Col>
           <Col span={5}>
-            <div className={styles.sidebar}>
-              side
-            </div>
+            <SideBar />
           </Col>
         </Row>
       </div>
