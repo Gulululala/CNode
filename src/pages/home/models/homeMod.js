@@ -10,7 +10,7 @@ const Module = {
   },
 
   effects: {
-    * getTopicList({ payload = { pageSize: 50, currentPage: 1 }, callback }, { put, call, select }) {
+    * getTopicList({ payload={page:1,tab:''} }, { put, call, select }) {
       const res = yield call(getList, payload);
       if (res.data.success) {
         // const { topicList} = yield select(d => d[Module.namespace]); 
@@ -21,16 +21,16 @@ const Module = {
             topicList: res.data.data
           }
         });
-        const { topicList } = yield select(d => d[Module.namespace]);
-        console.log('----------------------')
-        console.log(topicList);
-        console.log('----------------------')
+        const { topicList, detailList } = yield select(d => d[Module.namespace]);
 
         for (var i = 0; i < topicList.length; i++) {
           const detailRes = yield call(getDetailList, topicList[i]);
-          console.log('-------------------')
-          console.log(detailRes)
-          console.log('-------------------')
+          // console.log('-------------------')
+          // console.log(detailRes.data.data)
+          // detailList.push(detailRes.data.data)
+          // console.log("这是打印的第次",i)
+          // // console.log(detailList[0])
+          // console.log('-------------------')
         }
 
         // yield put({
