@@ -22,4 +22,10 @@ export default {
       },
     }],
   ],
+  proxy: {
+    "/api/v1": {
+      "target": "https://cnodejs.org",
+      "changeOrigin": true,
+    }
+  }
 }
