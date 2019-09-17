@@ -19,7 +19,7 @@ const Module = {
         type:'updateState',
         payload:{
           allContent:result,
-          data:result.data,
+          data:result.data.data,
           content:result.data.content,
           title:result.data.title,
           replies:result.data.replies
