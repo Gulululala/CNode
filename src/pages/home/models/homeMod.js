@@ -14,7 +14,6 @@ const Module = {
     * getTopicList({ payload={page:1,tab:''} }, { put, call, select }) {
       yield put({ type: 'updateStore', payload: { listLoading: true }});
       const res = yield call(getList, payload);
-      yield put({ type: 'updateStore', payload: { listLoading: false }});
       if (res.data.success) {
         yield put({
           type: 'updateStore',
@@ -41,6 +40,7 @@ const Module = {
         console.log("这是在effects里面的detailList")
         console.log("第二次打印detailList")
         console.log(detailList)
+        yield put({ type: 'updateStore', payload: { listLoading: false }});
         yield put({
           type: 'updateStore',
           payload: {
