@@ -22,6 +22,48 @@ export default {
       },
     }],
   ],
+  routes: [
+    {
+      path: '/',
+      component: '../layouts/index.js',
+      routes: [
+        {
+          path: '/',
+          redirect:'/home'
+        },
+        {
+          path: '/home',
+          component: './home/homeView.jsx',
+          title: '首页',
+        },
+        {
+          path: '/newerGuide',
+          component: './newerGuide/newerGuideView.jsx',
+          title: '新手入门',
+        },
+        {
+          path: '/api',
+          component: './api/apiView.jsx',
+          title: 'API',
+        },
+        {
+          path: '/about',
+          component: './about/aboutView.jsx',
+          title: '关于',
+        },
+        {
+          path: '/login',
+          component: './login/loginView.jsx',
+          title: '登录',
+        },
+        {
+          path: '/detail',
+          component: './detail/detailView.jsx',
+          title: '详情',
+        },
+      ]
+    },
+  ],
   proxy: {
     "/api/v1": {
       "target": "https://cnodejs.org",

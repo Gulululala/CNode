@@ -1,0 +1,67 @@
+.header {
+  background-color: #444;
+
+  .container {
+    width: 80%;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    height: 50px;
+    justify-content: space-between;
+
+    .left {
+      display: flex;
+      align-items: center;
+
+      .brand {
+        display: block;
+        width: 160px;
+        padding: 3px 20px;
+        height: 40px;
+        color: #ccc;
+      }
+
+      .search {
+        width: 234px;
+        height: 26px;
+        background: url(../../assets/search.png) 4px 4px no-repeat #888;
+        color: #666;
+        border: 0;
+        outline: 0;
+        border-radius: 15px;
+        transition: all .5s;
+        padding: 3px 5px 3px 22px;
+
+        &:hover {
+          background-color: #fff;
+        }
+      }
+    }
+
+    .right {
+      .nav {
+        display: flex;
+        align-items: center;
+        height: 40px;
+        margin: 0;
+        padding: 0;
+        
+        li {
+          padding: 10px 15px;
+
+          a {
+            color: #ccc;
+            font-size: 13px;
+
+            &:hover {
+              color: #fff;
+            }
+          }
+        }
+      }
+    }
+  }
+
+
+}
