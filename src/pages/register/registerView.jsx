@@ -1,17 +1,17 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'dva'
-import styles from './loginStyle.less'
+import styles from './registerStyle.less'
 import { Row, Col, Breadcrumb } from 'antd'
 import SideBar from '@/components/SideBar'
 import Link from 'umi/link'
 
-// const namespace = 'login'
+// const namespace = 'register'
 
-@connect(({ login }) => ({
-  login,
+@connect(({ registerMod }) => ({
+  registerMod,
 }))
 
-class Login extends PureComponent {
+class Register extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -32,7 +32,7 @@ class Login extends PureComponent {
                   <Breadcrumb.Item>
                     <Link to="/home" style={{color: '#80bd01'}}>主页</Link>
                   </Breadcrumb.Item>
-                  <Breadcrumb.Item style={{color: '#999'}}>登录</Breadcrumb.Item>
+                  <Breadcrumb.Item style={{color: '#999'}}>注册</Breadcrumb.Item>
                 </Breadcrumb>
               </div>
             </div>
@@ -46,4 +46,4 @@ class Login extends PureComponent {
   }
 }
 
-export default Login
+export default Register

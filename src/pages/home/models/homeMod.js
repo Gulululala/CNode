@@ -6,12 +6,15 @@ const Module = {
 
   state: {
     topicList: [],
-    detailList: []
+    detailList: [],
+    listLoading: false
   },
 
   effects: {
     * getTopicList({ payload={page:1,tab:''} }, { put, call, select }) {
+      yield put({ type: 'updateStore', payload: { listLoading: true }});
       const res = yield call(getList, payload);
+      yield put({ type: 'updateStore', payload: { listLoading: false }});
       if (res.data.success) {
         yield put({
           type: 'updateStore',
@@ -44,7 +47,6 @@ const Module = {
             detailList: detailList
           }
         });
-
         // yield put({
         //   type: `getDetailList`,
         //   payload: {id:topicList[0].id}
