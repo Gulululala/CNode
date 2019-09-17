@@ -1,6 +1,6 @@
-// 导出的状态机
-import * as query from "../detailServ"
+import { queryNews } from "../detailServ"
 
+// 导出的状态机
 const Module = {
   namespace: 'detail',
 
@@ -14,8 +14,7 @@ const Module = {
 
   effects: {
     *addNews({payload},{call,put}){
-      const result = yield call(query.queryNews)
-      console.log("我是结果",result)
+      const result = yield call(queryNews,payload)
       yield put({
         type:'updateState',
         payload:{

@@ -6,12 +6,15 @@ const Module = {
 
   state: {
     topicList: [],
-    detailList: []
+    detailList: [],
+    listLoading: false
   },
 
   effects: {
     * getTopicList({ payload={page:1,tab:''} }, { put, call, select }) {
+      yield put({ type: 'updateStore', payload: { listLoading: true }});
       const res = yield call(getList, payload);
+      yield put({ type: 'updateStore', payload: { listLoading: false }});
       if (res.data.success) {
         // const { topicList} = yield select(d => d[Module.namespace]); 
         // console.log(topicList)
@@ -23,15 +26,15 @@ const Module = {
         });
         const { topicList, detailList } = yield select(d => d[Module.namespace]);
 
-        for (var i = 0; i < topicList.length; i++) {
-          const detailRes = yield call(getDetailList, topicList[i]);
-          // console.log('-------------------')
-          // console.log(detailRes.data.data)
-          // detailList.push(detailRes.data.data)
-          // console.log("这是打印的第次",i)
-          // // console.log(detailList[0])
-          // console.log('-------------------')
-        }
+        // for (var i = 0; i < topicList.length; i++) {
+        //   const detailRes = yield call(getDetailList, topicList[i]);
+        //   console.log('-------------------')
+        //   console.log(detailRes.data.data)
+        //   detailList.push(detailRes.data.data)
+        //   console.log("这是打印的第次",i)
+        //   // console.log(detailList[0])
+        //   console.log('-------------------')
+        // }
 
         // yield put({
         //   type: `getDetailList`,

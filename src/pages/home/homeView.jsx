@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'dva'
 import styles from './homeStyle.less'
-import { Row, Col, Pagination, Button } from 'antd'
-import { dispatch } from '../../../../../../../../AppData/Local/Microsoft/TypeScript/3.6/node_modules/rxjs/internal/observable/range';
+import { Row, Col, Pagination, Button, Spin } from 'antd'
 import SideBar from '@/components/SideBar'
+import router from 'umi/router'
 
 const namespace = 'homeMod'
 
@@ -20,6 +20,7 @@ class HomeView extends PureComponent {
     }
     this.handleClick = this.handleClick.bind(this)
     this.pageChange = this.pageChange.bind(this)
+    this.showDetail = this.showDetail.bind(this)
   }
 
   handleClick(item,index) {
@@ -62,6 +63,15 @@ class HomeView extends PureComponent {
     })
   }
 
+  showDetail(id) {
+    router.push({
+      pathname: '/detail',
+      query: {
+        id,
+      },
+    });
+  }
+
   componentWillMount() {
     const { dispatch } = this.props
     dispatch({
@@ -70,7 +80,7 @@ class HomeView extends PureComponent {
   }
 
   render() {
-    const { dispatch, homeMod: { topicList, detailList} } = this.props
+    const { homeMod: { topicList, listLoading} } = this.props
     const { tabList,currentBtn } = this.state
     // console.log("********************************这里是render函数")
     // console.log("detailList")
@@ -79,29 +89,30 @@ class HomeView extends PureComponent {
       <div className={styles.container}>
         <Row gutter={16}>
           <Col span={19}>
-            <div className={styles.content}>
-              <div className={styles.contentHeader}>
-                {
-                  tabList.map((item,index)=>{
-                    return <Button 
-                            type='link' 
-                            onClick={()=>{this.handleClick(item,index)}} 
-                            key={item} 
-                            className={index===currentBtn?styles.contentCurrentBtn:styles.contentBtn}
-                          >
-                            {item}
-                          </Button>
-                  })
-                }
-              </div>
-              <ul className={styles.uLStyle}>
-                {
+            <Spin spinning={listLoading} tip="飞速获取信息中，客官请稍等...">
+              <div className={styles.content}>
+                <div className={styles.contentHeader}>
+                  {
+                    tabList.map((item,index)=>{
+                      return <Button
+                        type='link'
+                        onClick={()=>{this.handleClick(item,index)}}
+                        key={item}
+                        className={index===currentBtn?styles.contentCurrentBtn:styles.contentBtn}
+                      >
+                        {item}
+                      </Button>
+                    })
+                  }
+                </div>
+                <ul className={styles.uLStyle}>
+                  {
                     topicList.map((item,index)=>{
                       return (
                         <li className={styles.liStyle} key={item.id}>
-                          <img 
-                            src={item.author.avatar_url} 
-                            title={item.author.loginname} 
+                          <img
+                            src={item.author.avatar_url}
+                            title={item.author.loginname}
                             className={styles.imgStyle}
                           >
                           </img>
@@ -111,13 +122,13 @@ class HomeView extends PureComponent {
                           <span className={item.top?styles.topStyle:styles.typeStyle}>
                             { item.top ? "置顶" : item.tab==="share" ? "分享" : "问答" }
                           </span>
-                          <span className={styles.titleStyle}>
+                          <span className={styles.titleStyle} onClick={() => this.showDetail(item.id)}>
                             { item.title }
                           </span>
                           <div className={styles.replyStyle}>
-                            {/* <img 
-                              src={detailList[index].replies[0].author.avatar_url} 
-                              title={detailList[index].replies[0].author.loginname} 
+                            {/* <img
+                              src={detailList[index].replies[0].author.avatar_url}
+                              title={detailList[index].replies[0].author.loginname}
                               className={styles.replyPeopleImgStyle}
                             >
                             </img> */}
@@ -128,16 +139,17 @@ class HomeView extends PureComponent {
                         </li>
                       )
                     })
-                }
-              </ul>
-              <Pagination 
-                defaultCurrent={1} 
-                pageSize={40}
-                total={2000} 
-                className={styles.pageSplitStyle}
-                onChange={this.pageChange}
-              />
-            </div>
+                  }
+                </ul>
+                <Pagination
+                  defaultCurrent={1}
+                  pageSize={40}
+                  total={2000}
+                  className={styles.pageSplitStyle}
+                  onChange={this.pageChange}
+                />
+              </div>
+            </Spin>
           </Col>
           <Col span={5}>
             <SideBar />

@@ -41,7 +41,6 @@
         height: 32px;
         box-sizing: content-box;
         border-bottom: 1px solid #f0f0f0;
-        cursor: pointer;
 
         .imgStyle{
           display: block;
@@ -96,6 +95,11 @@
           white-space: nowrap;
           text-overflow: ellipsis;
           overflow: hidden;
+          cursor: pointer;
+
+          &:hover {
+            text-decoration: underline;
+          }
         }
 
         .replyStyle{

@@ -2,6 +2,8 @@ import React, { PureComponent } from 'react'
 import { connect } from 'dva'
 import styles from './detailStyle.less'
 import { Row, Col } from 'antd'
+import SideBar from '@/components/SideBar'
+
 
 // const namespace = 'detail'
 
@@ -17,14 +19,18 @@ class Detail extends PureComponent {
   }
 
   componentDidMount() {
+    const topicId = this.props.location.query.id
     this.props.dispatch({
-      type: 'detail/addNews'
+      type: 'detail/addNews',
+      payload: {
+        id: topicId
+      }
     })
   }
 
   render() {
-    console.log(this.props.detail)
-    const {  title} = this.props.detail
+    console.log(this.props)
+    const { title } = this.props.detail
     return (
       <div className={styles.container}>
         <Row gutter={16}>
@@ -59,57 +65,55 @@ aws lightsail是aws的vps，普遍说性能不怎么地，不支持ipv6（苹果
             </div>
           </Col>
           <Col span={5}>
-            <div className={styles.sidebar}>
-              <div className={styles.panel}>
-                <div className={styles.sidebar_header}>
-                  <span >作者</span>
-                </div>
-                <div className={styles.sidebar_inner}>
-                  <div className={styles.user_card}>
-                    <div>
-                      <a className={styles.user_avatar} href="/user/llydd">
-                        <img src="https://avatars0.githubusercontent.com/u/25981396?v=4&s=120" alt="" />
-                      </a>
-                      <span className={styles.user_name}>
-                        llydd
-                      </span>
-                      <div className={styles.user_board}>
-                        <div className={styles.user_floor}>
-                        <span className={styles.user_big}>
-                         积分:15
-                        </span>
-                        </div>
-                      </div>
-                      <div className={styles.user_space}>
-                        <span className={styles.user_signature}>
-                        "这家伙很懒，个性签名都没有留下。"
-                        </span>
-                      </div>
-                   
-
-                      
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className={styles.panel}>
-                <div className={styles.sidebar_inner}>
-                  <a href="https://www.aliyun.com/product/nodejs?ref=cnode" target="_blank" rel='noreferrer noopener' class="banner sponsor_outlink" data-label="alinode">
-                   <img src="//static.cnodejs.org/Fn4D6BhOTz1IswvmzeZ1q7QW1ls_" alt="" />
-                  </a>
-                  <div className={styles.sep10}></div>
-                  <a href="https://www.aliyun.com/product/nodejs?ref=cnode" target="_blank" rel='noreferrer noopener' class="banner sponsor_outlink" data-label="alinode">
-                   <img src="//static.cnodejs.org/FufeQ8S-sz6aKH5bvPXzVXvQG2Z-" alt="" />
-                  </a>
-                  <div className={styles.sep10}></div>
-                  <a href="https://www.aliyun.com/product/nodejs?ref=cnode" target="_blank" rel='noreferrer noopener' class="banner sponsor_outlink" data-label="alinode">
-                   <img src="//static.cnodejs.org/Fn4D6BhOTz1IswvmzeZ1q7QW1ls_" alt="" />
-                  </a>
-                </div>
-              </div>
-              <div className={styles.panel}></div>
-              <div className={styles.panel}></div>
-            </div>
+            <SideBar />
+            {/*<div className={styles.sidebar}>*/}
+            {/*  <div className={styles.panel}>*/}
+            {/*    <div className={styles.sidebar_header}>*/}
+            {/*      <span >作者</span>*/}
+            {/*    </div>*/}
+            {/*    <div className={styles.sidebar_inner}>*/}
+            {/*      <div className={styles.user_card}>*/}
+            {/*        <div>*/}
+            {/*          <a className={styles.user_avatar} href="/user/llydd">*/}
+            {/*            <img src="https://avatars0.githubusercontent.com/u/25981396?v=4&s=120" alt="" />*/}
+            {/*          </a>*/}
+            {/*          <span className={styles.user_name}>*/}
+            {/*            llydd*/}
+            {/*          </span>*/}
+            {/*          <div className={styles.user_board}>*/}
+            {/*            <div className={styles.user_floor}>*/}
+            {/*            <span className={styles.user_big}>*/}
+            {/*             积分:15*/}
+            {/*            </span>*/}
+            {/*            </div>*/}
+            {/*          </div>*/}
+            {/*          <div className={styles.user_space}>*/}
+            {/*            <span className={styles.user_signature}>*/}
+            {/*            "这家伙很懒，个性签名都没有留下。"*/}
+            {/*            </span>*/}
+            {/*          </div>*/}
+            {/*        </div>*/}
+            {/*      </div>*/}
+            {/*    </div>*/}
+            {/*  </div>*/}
+            {/*  <div className={styles.panel}>*/}
+            {/*    <div className={styles.sidebar_inner}>*/}
+            {/*      <a href="https://www.aliyun.com/product/nodejs?ref=cnode" target="_blank" rel='noreferrer noopener' class="banner sponsor_outlink" data-label="alinode">*/}
+            {/*       <img src="//static.cnodejs.org/Fn4D6BhOTz1IswvmzeZ1q7QW1ls_" alt="" />*/}
+            {/*      </a>*/}
+            {/*      <div className={styles.sep10}></div>*/}
+            {/*      <a href="https://www.aliyun.com/product/nodejs?ref=cnode" target="_blank" rel='noreferrer noopener' class="banner sponsor_outlink" data-label="alinode">*/}
+            {/*       <img src="//static.cnodejs.org/FufeQ8S-sz6aKH5bvPXzVXvQG2Z-" alt="" />*/}
+            {/*      </a>*/}
+            {/*      <div className={styles.sep10}></div>*/}
+            {/*      <a href="https://www.aliyun.com/product/nodejs?ref=cnode" target="_blank" rel='noreferrer noopener' class="banner sponsor_outlink" data-label="alinode">*/}
+            {/*       <img src="//static.cnodejs.org/Fn4D6BhOTz1IswvmzeZ1q7QW1ls_" alt="" />*/}
+            {/*      </a>*/}
+            {/*    </div>*/}
+            {/*  </div>*/}
+            {/*  <div className={styles.panel}></div>*/}
+            {/*  <div className={styles.panel}></div>*/}
+            {/*</div>*/}
           </Col>
         </Row>
       </div>

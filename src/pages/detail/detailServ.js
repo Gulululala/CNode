@@ -1,5 +1,5 @@
 import axios from 'axios';
 
-export function queryNews(){
-  return axios.get('/api/v1/topic/5433d5e4e737cbe96dcef312')
+export function queryNews(params){
+  return axios.get(`/api/v1/topic/${params.id}`)
 }
