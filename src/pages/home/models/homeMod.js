@@ -13,8 +13,6 @@ const Module = {
     * getTopicList({ payload={page:1,tab:''} }, { put, call, select }) {
       const res = yield call(getList, payload);
       if (res.data.success) {
-        // const { topicList} = yield select(d => d[Module.namespace]); 
-        // console.log(topicList)
         yield put({
           type: 'updateStore',
           payload: {
@@ -22,16 +20,30 @@ const Module = {
           }
         });
         const { topicList, detailList } = yield select(d => d[Module.namespace]);
-
+        detailList.splice(0,detailList.length)
+        // yield put({
+        //   type: 'updateStore',
+        //   payload: {
+        //     detailList: []
+        //   }
+        // });
+        console.log("-------点击分页按钮-------")
+        console.log("第一次打印detailList")
+        console.log("detailList",detailList)
+        console.log("topicList",topicList)
         for (var i = 0; i < topicList.length; i++) {
           const detailRes = yield call(getDetailList, topicList[i]);
-          // console.log('-------------------')
-          // console.log(detailRes.data.data)
-          // detailList.push(detailRes.data.data)
-          // console.log("这是打印的第次",i)
-          // // console.log(detailList[0])
-          // console.log('-------------------')
+          detailList.push(detailRes.data.data)
         }
+        console.log("这是在effects里面的detailList")
+        console.log("第二次打印detailList")
+        console.log(detailList)
+        yield put({
+          type: 'updateStore',
+          payload: {
+            detailList: detailList
+          }
+        });
 
         // yield put({
         //   type: `getDetailList`,

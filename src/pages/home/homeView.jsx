@@ -4,6 +4,7 @@ import styles from './homeStyle.less'
 import { Row, Col, Pagination, Button } from 'antd'
 import { dispatch } from '../../../../../../../../AppData/Local/Microsoft/TypeScript/3.6/node_modules/rxjs/internal/observable/range';
 import SideBar from '@/components/SideBar'
+import blackImg from '@/assets/black.jpg'
 
 const namespace = 'homeMod'
 
@@ -72,9 +73,6 @@ class HomeView extends PureComponent {
   render() {
     const { dispatch, homeMod: { topicList, detailList} } = this.props
     const { tabList,currentBtn } = this.state
-    // console.log("********************************这里是render函数")
-    // console.log("detailList")
-    // console.log(topicList)
     return (
       <div className={styles.container}>
         <Row gutter={16}>
@@ -115,12 +113,18 @@ class HomeView extends PureComponent {
                             { item.title }
                           </span>
                           <div className={styles.replyStyle}>
-                            {/* <img 
-                              src={detailList[index].replies[0].author.avatar_url} 
-                              title={detailList[index].replies[0].author.loginname} 
+                            {detailList.length===40 && detailList[index].replies[detailList[index].replies.length-1] && <img 
+                              src={detailList[index].replies[detailList[index].replies.length-1].author.avatar_url} 
+                              title={detailList[index].replies[detailList[index].replies.length-1].author.loginname} 
                               className={styles.replyPeopleImgStyle}
                             >
-                            </img> */}
+                            </img>}
+                            {detailList.length!==40 || !detailList[index].replies[detailList[index].replies.length-1] && <img 
+                              src={blackImg} 
+                              title="没有用户评论"
+                              className={styles.replyPeopleImgStyle}
+                            >
+                            </img>}
                             <span className={styles.howDayStyle}>
                                 3天前
                             </span>
