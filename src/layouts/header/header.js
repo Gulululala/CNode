@@ -22,7 +22,7 @@ function Header() {
     },
     {
       label: '注册',
-      path: '/login'
+      path: '/register'
     },
     {
       label: '登录',

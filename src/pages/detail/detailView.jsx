@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import { connect } from 'dva'
 import styles from './detailStyle.less'
 import { Row, Col } from 'antd'
+import SideBar from '@/components/SideBar'
 
 // const namespace = 'detail'
 
@@ -20,7 +21,6 @@ class Detail extends PureComponent {
   }
 
   render() {
-
     return (
       <div className={styles.container}>
         <Row gutter={16}>
@@ -30,9 +30,7 @@ class Detail extends PureComponent {
             </div>
           </Col>
           <Col span={5}>
-            <div className={styles.sidebar}>
-              side
-            </div>
+            <SideBar />
           </Col>
         </Row>
       </div>
