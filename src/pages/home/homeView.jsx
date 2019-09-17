@@ -2,8 +2,8 @@ import React, { PureComponent } from 'react'
 import { connect } from 'dva'
 import styles from './homeStyle.less'
 import { Row, Col, Pagination, Button, Spin } from 'antd'
-// import { dispatch } from '../../../../../../../../AppData/Local/Microsoft/TypeScript/3.6/node_modules/rxjs/internal/observable/range';
 import SideBar from '@/components/SideBar'
+import router from 'umi/router'
 
 const namespace = 'homeMod'
 
@@ -20,6 +20,7 @@ class HomeView extends PureComponent {
     }
     this.handleClick = this.handleClick.bind(this)
     this.pageChange = this.pageChange.bind(this)
+    this.showDetail = this.showDetail.bind(this)
   }
 
   handleClick(item,index) {
@@ -62,6 +63,15 @@ class HomeView extends PureComponent {
     })
   }
 
+  showDetail(id) {
+    router.push({
+      pathname: '/detail',
+      query: {
+        id,
+      },
+    });
+  }
+
   componentWillMount() {
     const { dispatch } = this.props
     dispatch({
@@ -70,7 +80,7 @@ class HomeView extends PureComponent {
   }
 
   render() {
-    const { dispatch, homeMod: { topicList, detailList, listLoading} } = this.props
+    const { homeMod: { topicList, listLoading} } = this.props
     const { tabList,currentBtn } = this.state
     // console.log("********************************这里是render函数")
     // console.log("detailList")
@@ -112,7 +122,7 @@ class HomeView extends PureComponent {
                           <span className={item.top?styles.topStyle:styles.typeStyle}>
                             { item.top ? "置顶" : item.tab==="share" ? "分享" : "问答" }
                           </span>
-                          <span className={styles.titleStyle}>
+                          <span className={styles.titleStyle} onClick={() => this.showDetail(item.id)}>
                             { item.title }
                           </span>
                           <div className={styles.replyStyle}>

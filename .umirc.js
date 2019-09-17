@@ -54,7 +54,7 @@ export default {
         {
           path: '/register',
           component: './register/registerView.jsx',
-          title: '登录',
+          title: '注册',
         },
         {
           path: '/login',
