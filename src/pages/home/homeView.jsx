@@ -19,15 +19,50 @@ class HomeView extends PureComponent {
       currentBtn: 0
     }
     this.handleClick = this.handleClick.bind(this)
+    this.pageChange = this.pageChange.bind(this)
   }
 
   handleClick(item,index) {
+    const { dispatch } = this.props
+    console.log(item,index)
+    let tab
+    switch (item) {
+      case "精华":
+        tab = "good"
+        break;
+      case "分享":
+        tab = "share"
+        break;
+      case "问答":
+        tab = "ask"
+        break;
+      default:
+        tab = "job"
+        break;
+    }
+    console.log(tab)
     this.setState({
       currentBtn: index
     })
+    dispatch({
+      type: `${namespace}/getTopicList`,
+      payload: {
+        tab
+      }
+    })
   }
 
-  componentDidMount() {
+  pageChange(page) {
+    const { dispatch } = this.props
+    dispatch({
+      type: `${namespace}/getTopicList`,
+      payload: {
+        page
+      }
+    })
+  }
+
+  componentWillMount() {
     const { dispatch } = this.props
     dispatch({
       type: `${namespace}/getTopicList`
@@ -35,8 +70,11 @@ class HomeView extends PureComponent {
   }
 
   render() {
-    const { dispatch, homeMod: { topicList} } = this.props
+    const { dispatch, homeMod: { topicList, detailList} } = this.props
     const { tabList,currentBtn } = this.state
+    // console.log("********************************这里是render函数")
+    // console.log("detailList")
+    // console.log(topicList)
     return (
       <div className={styles.container}>
         <Row gutter={16}>
@@ -78,8 +116,8 @@ class HomeView extends PureComponent {
                           </span>
                           <div className={styles.replyStyle}>
                             {/* <img 
-                              src={detailList.replies[(detailList.replies.length-1)].author.avatar_url} 
-                              title={detailList.replies[(detailList.replies.length-1)].author.loginname} 
+                              src={detailList[index].replies[0].author.avatar_url} 
+                              title={detailList[index].replies[0].author.loginname} 
                               className={styles.replyPeopleImgStyle}
                             >
                             </img> */}
@@ -92,6 +130,13 @@ class HomeView extends PureComponent {
                     })
                 }
               </ul>
+              <Pagination 
+                defaultCurrent={1} 
+                pageSize={40}
+                total={2000} 
+                className={styles.pageSplitStyle}
+                onChange={this.pageChange}
+              />
             </div>
           </Col>
           <Col span={5}>
