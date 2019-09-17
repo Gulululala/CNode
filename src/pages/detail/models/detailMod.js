@@ -9,14 +9,17 @@ const Module = {
     data:[],
     replies:[],
     content:'',
-    title:''
+    title:'',
+    listLoading: false
   },
 
   effects: {
     *addNews({payload},{call,put}){
+      yield put({ type: 'updateStore', payload: { listLoading: true }});
       const result = yield call(queryNews,payload)
+      yield put({ type: 'updateStore', payload: { listLoading: false }});
       yield put({
-        type:'updateState',
+        type:'updateStore',
         payload:{
           allContent:result,
           data:result.data.data,
@@ -30,7 +33,7 @@ const Module = {
 
   },
   reducers: {
-    updateState(preState, action) {
+    updateStore(preState, action) {
       return { ...preState, ...action.payload }
     },
   },

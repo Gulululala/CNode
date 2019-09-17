@@ -87,7 +87,7 @@ class HomeView extends PureComponent {
       <div className={styles.container}>
         <Row gutter={16}>
           <Col span={19}>
-            {/* <Spin spinning={listLoading} tip="飞速获取信息中，客官请稍等..."> */}
+             <Spin spinning={listLoading} tip="飞速获取信息中，客官请稍等...">
               <div className={styles.content}>
                 <div className={styles.contentHeader}>
                   {
@@ -153,7 +153,7 @@ class HomeView extends PureComponent {
                   onChange={this.pageChange}
                 />
               </div>
-            {/* </Spin> */}
+             </Spin>
           </Col>
           <Col span={5}>
             <SideBar />
