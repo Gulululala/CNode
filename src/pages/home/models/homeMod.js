@@ -14,6 +14,7 @@ const Module = {
     * getTopicList({ payload={page:1,tab:''} }, { put, call, select }) {
       yield put({ type: 'updateStore', payload: { listLoading: true }});
       const res = yield call(getList, payload);
+      yield put({ type: 'updateStore', payload: { listLoading: false }});
       if (res.data.success) {
         yield put({
           type: 'updateStore',
@@ -21,54 +22,20 @@ const Module = {
             topicList: res.data.data
           }
         });
-        const { topicList, detailList } = yield select(d => d[Module.namespace]);
-        detailList.splice(0,detailList.length)
+        // const { topicList, detailList } = yield select(d => d[Module.namespace]);
+        // detailList.splice(0,detailList.length)
+        // for (var i = 0; i < topicList.length; i++) {
+        //   const detailRes = yield call(getDetailList, topicList[i]);
+        //   detailList.push(detailRes.data.data)
+        // }
+        //
+
         // yield put({
         //   type: 'updateStore',
         //   payload: {
-        //     detailList: []
+        //     detailList: detailList
         //   }
         // });
-        console.log("-------点击分页按钮-------")
-        console.log("第一次打印detailList")
-        console.log("detailList",detailList)
-        console.log("topicList",topicList)
-        for (var i = 0; i < topicList.length; i++) {
-          const detailRes = yield call(getDetailList, topicList[i]);
-          detailList.push(detailRes.data.data)
-        }
-        console.log("这是在effects里面的detailList")
-        console.log("第二次打印detailList")
-        console.log(detailList)
-        yield put({ type: 'updateStore', payload: { listLoading: false }});
-        yield put({
-          type: 'updateStore',
-          payload: {
-            detailList: detailList
-          }
-        });
-        // yield put({
-        //   type: `getDetailList`,
-        //   payload: {id:topicList[0].id}
-        // })
-        // for (var i = 0; i < topicList.length; i++) {
-        //   yield put({
-        //     type: `getDetailList`,
-        //     payload: { id: topicList[i].id }
-        //   })
-          // console.log(i,"执行完了")
-          // const { detailList } = yield select(d => d[Module.namespace]);
-          // console.log('----------------------')
-          // console.log(detailList)
-          // console.log('----------------------')
-        // }
-        // 会打印不出东西来
-        // topicList.forEach((item,index)=>{
-        //   // put({
-        //   //   type: `getDetailList`,
-        //   //   payload: {id:item.id}
-        //   // })
-        // })
       }
     },
 
@@ -81,7 +48,6 @@ const Module = {
             detailList: res.data.data
           }
         });
-        // console.log("getDetailList执行完了")
       }
     }
   },
